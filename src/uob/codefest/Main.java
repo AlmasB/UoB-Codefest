@@ -3,12 +3,24 @@ package uob.codefest;
 import static java.util.Arrays.asList;
 
 /**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
+ * @author Almas Baimagambetov
  */
 public class Main {
 
     private static final Codefest c = new Solutions();
     private static int count = 1;
+    private static final String[] challengeNames = {
+        "Casper",
+        "Jason Voorhees",
+        "Dracula",
+        "Jigsaw",
+        "Alien",
+        "It",
+        "Leatherface",
+        "Michael Myers",
+        "Freddy Krueger",
+        "Frankenstein's monster"
+    };
 
     public static void main(String[] args) {
         Runnable[] challenges = new Runnable[] {
@@ -25,7 +37,7 @@ public class Main {
         };
 
         for (int i = 0; i < challenges.length; i++) {
-            System.out.println("Challenge " + (i + 1));
+            System.out.println("Challenge " + (i + 1) + " from " + challengeNames[i]);
             count = 1;
 
             challenges[i].run();

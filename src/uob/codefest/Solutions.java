@@ -3,7 +3,7 @@ package uob.codefest;
 import java.util.List;
 
 /**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
+ * @author Almas Baimagambetov
  */
 public class Solutions implements Codefest {
     @Override
