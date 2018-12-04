@@ -2,8 +2,6 @@ package year2018.dec.level6;
 
 import java.util.Arrays;
 
-import static java.util.Arrays.asList;
-
 /**
  * For Year 3 (Level 6).
  *
@@ -62,9 +60,8 @@ public class Main {
     }
 
     private static void challenge4() {
-        test(c.challenge4(1, 2, 3) == 4);
-        test(c.challenge4(1, 5, 8) == 11);
-        test(c.challenge4(2, 6, 9) == 12);
+        test(c.challenge4(javafx.geometry.Point2D.class, 10.0, 15.0).equals(new javafx.geometry.Point2D(10.0, 15.0)));
+        test(c.challenge4(java.awt.Point.Double.class, -33.0, 15.0).equals(new java.awt.Point.Double(-33.0, 15.0)));
     }
 
     private static void challenge5() {
