@@ -42,9 +42,9 @@ public class Main {
 
         test(Arrays.equals(new int[] {0, 2}, c.challenge2(input1, 40)));
 
-        int[] input2 = {10, 30, 50, 70};
+        int[] input2 = {10, 30, 50, 80};
 
-        test(Arrays.equals(new int[] {0, 3}, c.challenge2(input2, 80)));
+        test(Arrays.equals(new int[] {1, 3}, c.challenge2(input2, 110)));
     }
 
     private static void challenge3() {
@@ -65,15 +65,23 @@ public class Main {
     }
 
     private static void challenge5() {
-        String input = "public int f(int i){return 3+5;}";
+        String input1 = "public int f(int i){return 3+5;}";
+
+        test(c.challenge5(input1, 0) == 8);
 
         String input2 = "private static int f2(int i)\n"
                 + "{\n"
-                + "return i*i - 8;\n"
+                + "return i * i - 8;\n"
                 + "}\n";
 
-        test(c.challenge5(input, 0) == 8);
         test(c.challenge5(input2, 3) == 1);
+
+        String input3 = "private static int f3(int i)\n"
+                + "{\n"
+                + "return i / 1 - 1;\n"
+                + "}\n";
+
+        test(c.challenge5(input3, 4) == 3);
     }
 
     private static void test(boolean result) {
