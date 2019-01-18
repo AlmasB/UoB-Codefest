@@ -80,14 +80,19 @@ public class Main {
         }
     }
 
-
-
-
-
     private static void challenge8() {
+        test(c.challenge8(25, "sqrt") == 5);
+        test(c.challenge8(30, "square") == 900);
+        test(c.challenge8(81, "sqrt sqrt quad sqrt") == 9);
+        test(c.challenge8(2, "quad square") == 256);
     }
 
     private static void challenge9() {
+        test(c.challenge9("racecar") == 0);
+        test(c.challenge9("abba") == 0);
+        test(c.challenge9("ab") == 1);
+        test(c.challenge9("abad") == 1);
+        test(c.challenge9("abcd") == 3);
     }
 
     private static void challenge10() {
