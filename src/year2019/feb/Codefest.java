@@ -19,5 +19,9 @@ public interface Codefest {
 
     int challenge6(String s);
 
+    int challenge7();
+
+    challenge8();
+
     String challenge10(String s, String s2);
 }

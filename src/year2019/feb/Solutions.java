@@ -38,6 +38,11 @@ public class Solutions implements Codefest {
     }
 
     @Override
+    public int challenge7() {
+        return 0;
+    }
+
+    @Override
     public String challenge10(String s, String s2) {
         return "";
     }

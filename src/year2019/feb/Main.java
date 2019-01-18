@@ -74,11 +74,15 @@ public class Main {
         test(c.challenge6("Right... How many clues will it take them to solve this ...") == 2);
     }
 
-
-
-
     private static void challenge7() {
+        for (int i = 0; i < 10; i++) {
+            test(c.challenge7() == i*i);
+        }
     }
+
+
+
+
 
     private static void challenge8() {
     }
