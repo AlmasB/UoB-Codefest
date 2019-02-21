@@ -9,7 +9,7 @@ public interface Codefest {
 
     boolean challenge2(String a, String b);
 
-    int challenge3(int a, int b);
+    int[] challenge3(int[] a, int b);
 
     int challenge4(int a);
 

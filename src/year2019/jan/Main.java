@@ -47,9 +47,13 @@ public class Main {
     }
 
     private static void challenge3() {
-        test(c.challenge3(-1, 2) == 1);
-        test(c.challenge3(3, 4) == 81);
-        test(c.challenge3(3, 0) == 1);
+        int[] input1 = {10, 20, 30, 40};
+
+        test(Arrays.equals(new int[] {0, 2}, c.challenge3(input1, 40)));
+
+        int[] input2 = {10, 30, 50, 80};
+
+        test(Arrays.equals(new int[] {1, 3}, c.challenge3(input2, 110)));
     }
 
     private static void challenge4() {
