@@ -15,8 +15,8 @@ public class Solutions implements Codefest {
     }
 
     @Override
-    public int challenge3(int a, int b) {
-        return 0;
+    public int[] challenge3(int[] a, int b) {
+        return null;
     }
 
     @Override
