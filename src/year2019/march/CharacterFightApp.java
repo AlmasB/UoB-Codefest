@@ -36,7 +36,7 @@ public class CharacterFightApp extends Application {
             public void handle(long now) {
                 t += 0.016;
 
-                if (t > 4) {
+                if (t > 1) {
                     onUpdate();
                     t = 0;
                 }
@@ -100,6 +100,11 @@ public class CharacterFightApp extends Application {
     }
 
     private void dealDamage(BaseCharacter atk, BaseCharacter target, MoveType moveType) {
+        if (target.isInvulnerable()) {
+            pushMessage(atk.getName() + " does no damage with " + moveType + ". " + target.getName() + " is invulnerable!");
+            return;
+        }
+
         int dmg = atk.getDamageFrom(moveType);
 
         double dmgModifier = atk.getWeaponElement().getDamageModifierAgainst(target.getArmorElement());
@@ -115,8 +120,7 @@ public class CharacterFightApp extends Application {
         target.takeDamage(dmg);
 
         // reset crit status for both
-        atk.setCritical(false);
-        target.setCritical(false);
+        atk.reset();
 
         pushMessage(
                 (isCrit ? "CRITICAL! " : "") +

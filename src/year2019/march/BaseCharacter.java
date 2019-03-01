@@ -21,8 +21,10 @@ public abstract class BaseCharacter {
     private Element weaponElement = Element.NEUTRAL;
 
     private int critCount = 2;
+    private int invulCount = 1;
 
     private boolean isCritical = false;
+    private boolean isInvulnerable = false;
 
     public final String getName() {
         return name;
@@ -46,10 +48,6 @@ public abstract class BaseCharacter {
 
     public final boolean isCritical() {
         return isCritical;
-    }
-
-    final void setCritical(boolean critical) {
-        isCritical = critical;
     }
 
     protected final void setNextMoveAsCritical() {
@@ -144,6 +142,23 @@ public abstract class BaseCharacter {
 
     final Element getWeaponElement() {
         return weaponElement;
+    }
+
+    final boolean isInvulnerable() {
+        return isInvulnerable;
+    }
+
+    protected void setNextMoveInvulnerable() {
+        if (invulCount == 0)
+            return;
+
+        invulCount--;
+        isInvulnerable = true;
+    }
+
+    final void reset() {
+        isCritical = false;
+        isInvulnerable = false;
     }
 
     protected abstract Move makeMove(BaseCharacter other);

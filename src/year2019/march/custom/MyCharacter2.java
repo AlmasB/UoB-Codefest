@@ -23,7 +23,7 @@ public class MyCharacter2 extends BaseCharacter {
     @Override
     protected Move makeMove(BaseCharacter other) {
         setNextMoveAsCritical();
-
+        setNextMoveInvulnerable();
 
         if (Math.random() < 0.5) {
             return new Move(MoveType.ATTACK);
