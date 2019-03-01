@@ -60,18 +60,22 @@ public class CharacterFightApp extends Application {
 
         if (result == MoveResult.DRAW) {
 
-            output.appendText("Both players used " + move1.getType() + "!\n");
+            pushMessage("Both players used " + move1.getType() + "! Rolling dice!");
 
             int die1 = CombatMath.getRandomValue(char1.getLuck());
             int die2 = CombatMath.getRandomValue(char1.getLuck());
 
             if (die1 == die2) {
-                output.appendText("Both players rolled " + die1 + "! No damage to either.\n");
+                pushMessage("Both players rolled " + die1 + "! No damage to either.");
             } else if (die1 > die2) {
+
+                pushMessage(char1.getName() + " is lucky!");
 
                 dealDamage(char1, char2, move1.getType());
 
             } else { // die2 > die1
+
+                pushMessage(char2.getName() + " is lucky!");
 
                 dealDamage(char2, char1, move2.getType());
             }
@@ -87,20 +91,41 @@ public class CharacterFightApp extends Application {
 
         if (char1.isDead()) {
             timer.stop();
-            output.appendText(char2.getClass().getSimpleName() + " wins!");
+            pushMessage(char2.getName() + " wins!");
 
         } else if (char2.isDead()) {
             timer.stop();
-            output.appendText(char1.getClass().getSimpleName() + " wins!");
+            pushMessage(char1.getName() + " wins!");
         }
     }
 
     private void dealDamage(BaseCharacter atk, BaseCharacter target, MoveType moveType) {
         int dmg = atk.getDamageFrom(moveType);
 
+        double dmgModifier = atk.getWeaponElement().getDamageModifierAgainst(target.getArmorElement());
+
+        dmg = (int)(dmg * dmgModifier + 1);
+
+        boolean isCrit = atk.isCritical();
+
+        if (isCrit) {
+            dmg = (int)(dmg * 1.3);
+        }
+
         target.takeDamage(dmg);
 
-        output.appendText(atk.getClass().getSimpleName() + " uses " + moveType + " to deal " + dmg + " to " + target.getClass().getSimpleName() + "\n");
+        // reset crit status for both
+        atk.setCritical(false);
+        target.setCritical(false);
+
+        pushMessage(
+                (isCrit ? "CRITICAL! " : "") +
+                        atk.getName() + " uses " + moveType + " to deal " + dmg + " " + atk.getWeaponElement() + " damage to " + target.getName()
+        );
+    }
+
+    private void pushMessage(String text) {
+        output.appendText(text + "\n\n");
     }
 
     @Override

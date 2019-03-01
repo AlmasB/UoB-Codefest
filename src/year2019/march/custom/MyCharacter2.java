@@ -1,6 +1,7 @@
 package year2019.march.custom;
 
 import year2019.march.BaseCharacter;
+import year2019.march.Element;
 import year2019.march.Move;
 import year2019.march.MoveType;
 
@@ -10,13 +11,20 @@ import year2019.march.MoveType;
 public class MyCharacter2 extends BaseCharacter {
 
     public MyCharacter2() {
-        super();
+        setName("Character 2");
 
-        addIntellect(30);
+        addIntellect(15);
+        addLuck(15);
+
+        setArmorElement(Element.AIR);
+        setWeaponElement(Element.FIRE);
     }
 
     @Override
-    public Move makeMove(BaseCharacter other) {
+    protected Move makeMove(BaseCharacter other) {
+        setNextMoveAsCritical();
+
+
         if (Math.random() < 0.5) {
             return new Move(MoveType.ATTACK);
         }

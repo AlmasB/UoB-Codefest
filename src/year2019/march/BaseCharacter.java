@@ -5,6 +5,8 @@ package year2019.march;
  */
 public abstract class BaseCharacter {
 
+    private String name;
+
     private int hp = 100;
 
     private int strength = 1;
@@ -14,6 +16,21 @@ public abstract class BaseCharacter {
     private int luck = 5;
 
     private int attributePoints = 30;
+
+    private Element armorElement = Element.NEUTRAL;
+    private Element weaponElement = Element.NEUTRAL;
+
+    private int critCount = 2;
+
+    private boolean isCritical = false;
+
+    public final String getName() {
+        return name;
+    }
+
+    protected final void setName(String name) {
+        this.name = name;
+    }
 
     public final int getHp() {
         return hp;
@@ -25,6 +42,28 @@ public abstract class BaseCharacter {
 
     boolean isDead() {
         return hp <= 0;
+    }
+
+    public final boolean isCritical() {
+        return isCritical;
+    }
+
+    final void setCritical(boolean critical) {
+        isCritical = critical;
+    }
+
+    protected final void setNextMoveAsCritical() {
+        if (critCount == 0)
+            return;
+
+        isCritical = true;
+
+        // if lots of luck and 50% chance works, then this is critical is free
+        if (luck > 20 && Math.random() < 0.5) {
+            critCount++;
+        }
+
+        critCount--;
     }
 
     public final int getStrength() {
@@ -44,6 +83,13 @@ public abstract class BaseCharacter {
     }
 
     public final int getDamageFrom(MoveType type) {
+        int dmg = calcDamage(type);
+
+        // deal at least 1 damage
+        return Math.max(dmg, 1);
+    }
+
+    private int calcDamage(MoveType type) {
         switch (type) {
             case ATTACK:
                 return strength + CombatMath.getRandomValue(luck);
@@ -56,35 +102,51 @@ public abstract class BaseCharacter {
         }
     }
 
-    public final void addStrength(int value) {
+    protected final void addStrength(int value) {
         checkValue(value);
 
         strength += value;
         attributePoints -= value;
     }
 
-    public final void addVitality(int value) {
+    protected final void addVitality(int value) {
         checkValue(value);
 
         vitality += value;
         attributePoints -= value;
     }
 
-    public final void addIntellect(int value) {
+    protected final void addIntellect(int value) {
         checkValue(value);
 
         intellect += value;
         attributePoints -= value;
     }
 
-    public final void addLuck(int value) {
+    protected final void addLuck(int value) {
         checkValue(value);
 
         luck += value;
         attributePoints -= value;
     }
 
-    public abstract Move makeMove(BaseCharacter other);
+    protected final void setArmorElement(Element armorElement) {
+        this.armorElement = armorElement;
+    }
+
+    final Element getArmorElement() {
+        return armorElement;
+    }
+
+    protected final void setWeaponElement(Element weaponElement) {
+        this.weaponElement = weaponElement;
+    }
+
+    final Element getWeaponElement() {
+        return weaponElement;
+    }
+
+    protected abstract Move makeMove(BaseCharacter other);
 
     private void checkValue(int value) {
         if (value > attributePoints) {

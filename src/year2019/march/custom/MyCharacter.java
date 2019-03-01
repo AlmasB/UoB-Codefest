@@ -9,8 +9,12 @@ import year2019.march.MoveType;
  */
 public class MyCharacter extends BaseCharacter {
 
+    public MyCharacter() {
+        setName("Char 1");
+    }
+
     @Override
-    public Move makeMove(BaseCharacter other) {
+    protected Move makeMove(BaseCharacter other) {
         return new Move(MoveType.BLOCK);
     }
 }
