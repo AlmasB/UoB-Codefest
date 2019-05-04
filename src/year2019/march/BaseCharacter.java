@@ -1,5 +1,10 @@
 package year2019.march;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
  */
@@ -7,7 +12,7 @@ public abstract class BaseCharacter {
 
     private String name;
 
-    private int hp = 150;
+    IntegerProperty hp = new SimpleIntegerProperty(150);
 
     private int strength = 1;
     private int vitality = 1;
@@ -35,15 +40,15 @@ public abstract class BaseCharacter {
     }
 
     public final int getHp() {
-        return hp;
+        return hp.getValue();
     }
 
     final void takeDamage(int value) {
-        hp -= value;
+        hp.setValue(hp.getValue() - value);
     }
 
     boolean isDead() {
-        return hp <= 0;
+        return getHp() <= 0;
     }
 
     public final boolean isCritical() {
@@ -166,7 +171,7 @@ public abstract class BaseCharacter {
         attributePoints = 30;
     }
 
-    final void reset() {
+    final void onMoveFinished() {
         isCritical = false;
         isInvulnerable = false;
     }

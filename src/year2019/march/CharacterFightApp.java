@@ -5,7 +5,8 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import year2019.march.custom.MyCharacter;
@@ -16,6 +17,7 @@ import year2019.march.custom.MyCharacter2;
  */
 public class CharacterFightApp extends Application {
 
+    private Pane root = new Pane();
     private TextArea output = new TextArea();
     private AnimationTimer timer;
     private double t = 0;
@@ -24,10 +26,11 @@ public class CharacterFightApp extends Application {
     private BaseCharacter char2;
 
     private Parent createContent() {
-        output.setFont(Font.font(48));
+        root.setPrefSize(1600, 900);
+        root.setBackground(null);
 
-        StackPane root = new StackPane();
-        root.getChildren().add(output);
+        output.setFont(Font.font(48));
+        output.setTranslateY(100);
 
         initGame();
 
@@ -50,6 +53,17 @@ public class CharacterFightApp extends Application {
     private void initGame() {
         char1 = new MyCharacter();
         char2 = new MyCharacter2();
+
+        CharacterView view1 = new CharacterView(char1);
+        CharacterView view2 = new CharacterView(char2);
+
+        view1.setTranslateX(10);
+        view1.setTranslateY(10);
+
+        view2.setTranslateX(root.getPrefWidth() - 200 - 10);
+        view2.setTranslateY(10);
+
+        root.getChildren().setAll(view1, view2, output);
     }
 
     private void onUpdate() {
@@ -89,6 +103,10 @@ public class CharacterFightApp extends Application {
             dealDamage(char2, char1, move2.getType());
         }
 
+        // reset status for both
+        char1.onMoveFinished();
+        char2.onMoveFinished();
+
         if (char1.isDead()) {
             timer.stop();
             pushMessage(char2.getName() + " wins!");
@@ -102,8 +120,6 @@ public class CharacterFightApp extends Application {
     private void dealDamage(BaseCharacter atk, BaseCharacter target, MoveType moveType) {
         if (target.isInvulnerable()) {
             pushMessage(atk.getName() + " does no damage with " + moveType + ". " + target.getName() + " is invulnerable!");
-            atk.reset();
-            target.reset();
             return;
         }
 
@@ -120,9 +136,6 @@ public class CharacterFightApp extends Application {
         }
 
         target.takeDamage(dmg);
-
-        // reset crit status for both
-        atk.reset();
 
         pushMessage(
                 (isCrit ? "CRITICAL! " : "") +
