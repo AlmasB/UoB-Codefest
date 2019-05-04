@@ -15,6 +15,9 @@ public class MyCharacter extends BaseCharacter {
 
     @Override
     protected Move makeMove(BaseCharacter other) {
+        if (getHp() < 50)
+            setNextMoveInvulnerable();
+
         return new Move(MoveType.BLOCK);
     }
 }

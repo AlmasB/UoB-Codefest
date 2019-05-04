@@ -1,9 +1,6 @@
 package year2019.march;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
@@ -22,8 +19,8 @@ public abstract class BaseCharacter {
 
     private int attributePoints = 30;
 
-    private Element armorElement = Element.NEUTRAL;
-    private Element weaponElement = Element.NEUTRAL;
+    ObjectProperty<Element> armorElement = new SimpleObjectProperty<>(Element.NEUTRAL);
+    ObjectProperty<Element> weaponElement = new SimpleObjectProperty<>(Element.NEUTRAL);
 
     private int critCount = 2;
     private int invulCount = 1;
@@ -134,19 +131,19 @@ public abstract class BaseCharacter {
     }
 
     protected final void setArmorElement(Element armorElement) {
-        this.armorElement = armorElement;
+        this.armorElement.setValue(armorElement);
     }
 
     final Element getArmorElement() {
-        return armorElement;
+        return armorElement.getValue();
     }
 
     protected final void setWeaponElement(Element weaponElement) {
-        this.weaponElement = weaponElement;
+        this.weaponElement.setValue(weaponElement);
     }
 
     final Element getWeaponElement() {
-        return weaponElement;
+        return weaponElement.getValue();
     }
 
     final boolean isInvulnerable() {
