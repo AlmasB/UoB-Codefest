@@ -63,7 +63,7 @@ public class CharacterFightApp extends Application {
             pushMessage("Both players used " + move1.getType() + "! Rolling dice!");
 
             int die1 = CombatMath.getRandomValue(char1.getLuck());
-            int die2 = CombatMath.getRandomValue(char1.getLuck());
+            int die2 = CombatMath.getRandomValue(char2.getLuck());
 
             if (die1 == die2) {
                 pushMessage("Both players rolled " + die1 + "! No damage to either.");
@@ -102,6 +102,8 @@ public class CharacterFightApp extends Application {
     private void dealDamage(BaseCharacter atk, BaseCharacter target, MoveType moveType) {
         if (target.isInvulnerable()) {
             pushMessage(atk.getName() + " does no damage with " + moveType + ". " + target.getName() + " is invulnerable!");
+            atk.reset();
+            target.reset();
             return;
         }
 

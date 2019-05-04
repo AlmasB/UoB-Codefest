@@ -7,7 +7,7 @@ public abstract class BaseCharacter {
 
     private String name;
 
-    private int hp = 100;
+    private int hp = 150;
 
     private int strength = 1;
     private int vitality = 1;
@@ -56,7 +56,7 @@ public abstract class BaseCharacter {
 
         isCritical = true;
 
-        // if lots of luck and 50% chance works, then this is critical is free
+        // if lots of luck and 50% chance works, then this critical is free
         if (luck > 20 && Math.random() < 0.5) {
             critCount++;
         }
@@ -156,6 +156,16 @@ public abstract class BaseCharacter {
         isInvulnerable = true;
     }
 
+    protected void resetAttributePoints() {
+        strength = 1;
+        vitality = 1;
+        intellect = 1;
+
+        luck = 5;
+
+        attributePoints = 30;
+    }
+
     final void reset() {
         isCritical = false;
         isInvulnerable = false;
@@ -164,8 +174,10 @@ public abstract class BaseCharacter {
     protected abstract Move makeMove(BaseCharacter other);
 
     private void checkValue(int value) {
-        if (value > attributePoints) {
+        if (value < 0)
+            throw new RuntimeException("Value cannot be negative!");
+
+        if (value > attributePoints)
             throw new RuntimeException("You cannot use more than 30 attribute points!");
-        }
     }
 }
