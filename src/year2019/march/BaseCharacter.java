@@ -2,10 +2,15 @@ package year2019.march;
 
 import javafx.beans.property.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
  */
 public abstract class BaseCharacter {
+
+    private static final int MAX_ATTRIBUTE_POINTS = 35;
 
     private String name;
 
@@ -17,7 +22,7 @@ public abstract class BaseCharacter {
 
     private int luck = 5;
 
-    private int attributePoints = 30;
+    private int attributePoints = MAX_ATTRIBUTE_POINTS;
 
     ObjectProperty<Element> armorElement = new SimpleObjectProperty<>(Element.NEUTRAL);
     ObjectProperty<Element> weaponElement = new SimpleObjectProperty<>(Element.NEUTRAL);
@@ -27,6 +32,8 @@ public abstract class BaseCharacter {
 
     private boolean isCritical = false;
     private boolean isInvulnerable = false;
+
+    private List<Move> opponentMoves = new ArrayList<>();
 
     public final String getName() {
         return name;
@@ -92,11 +99,11 @@ public abstract class BaseCharacter {
     private int calcDamage(MoveType type) {
         switch (type) {
             case ATTACK:
-                return strength + CombatMath.getRandomValue(luck);
+                return strength + CombatMath.getRandomLuckDamage(luck);
             case SKILL:
-                return intellect + CombatMath.getRandomValue(luck);
+                return intellect + CombatMath.getRandomLuckDamage(luck);
             case BLOCK:
-                return vitality + CombatMath.getRandomValue(luck);
+                return vitality + CombatMath.getRandomLuckDamage(luck);
             default:
                 throw new RuntimeException("Can't happen! " + type);
         }
@@ -165,7 +172,15 @@ public abstract class BaseCharacter {
 
         luck = 5;
 
-        attributePoints = 30;
+        attributePoints = MAX_ATTRIBUTE_POINTS;
+    }
+
+    final void addOpponentMove(Move move) {
+        opponentMoves.add(move);
+    }
+
+    protected List<Move> getOpponentMoves() {
+        return opponentMoves;
     }
 
     final void onMoveFinished() {
@@ -180,6 +195,6 @@ public abstract class BaseCharacter {
             throw new RuntimeException("Value cannot be negative!");
 
         if (value > attributePoints)
-            throw new RuntimeException("You cannot use more than 30 attribute points!");
+            throw new RuntimeException("You cannot use more than " + MAX_ATTRIBUTE_POINTS + " attribute points!");
     }
 }

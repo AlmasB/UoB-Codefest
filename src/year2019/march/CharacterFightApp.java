@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -78,40 +77,21 @@ public class CharacterFightApp extends Application {
         Move move1 = char1.makeMove(char2);
         Move move2 = char2.makeMove(char1);
 
+        char1.addOpponentMove(move2);
+        char2.addOpponentMove(move1);
+
         MoveResult result = move1.getType().checkAgainst(move2.getType());
 
         if (result == MoveResult.DRAW) {
-            //playAttackAnimation(view1);
-            //playAttackAnimation(view2);
 
-            pushMessage("Both players used " + move1.getType() + "! Rolling dice!");
-
-            int die1 = CombatMath.getRandomValue(char1.getLuck());
-            int die2 = CombatMath.getRandomValue(char2.getLuck());
-
-            if (die1 == die2) {
-                pushMessage("Both players rolled " + die1 + "! No damage to either.");
-            } else if (die1 > die2) {
-
-                pushMessage(char1.getName() + " is lucky!");
-
-                dealDamage(char1, char2, move1.getType());
-
-            } else { // die2 > die1
-
-                pushMessage(char2.getName() + " is lucky!");
-
-                dealDamage(char2, char1, move2.getType());
-            }
+            pushMessage("Both players used " + move1.getType() + "! No damage to either!");
 
         } else if (result == MoveResult.WIN) {
 
-            //playAttackAnimation(view1);
             dealDamage(char1, char2, move1.getType());
 
         } else { // LOSE
 
-            //playAttackAnimation(view2);
             dealDamage(char2, char1, move2.getType());
         }
 
@@ -146,7 +126,7 @@ public class CharacterFightApp extends Application {
         boolean isCrit = atk.isCritical();
 
         if (isCrit) {
-            dmg = (int)(dmg * 1.3);
+            dmg = (int)(dmg * 1.75);
         }
 
         target.takeDamage(dmg);

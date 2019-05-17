@@ -42,12 +42,9 @@ public class CharacterView extends Parent {
 
         Text textArmor = new Text();
         textArmor.setFont(Font.font(28));
-        textArmor.textProperty().bind(character.weaponElement.asString("Armour: %s"));
+        textArmor.textProperty().bind(character.armorElement.asString("Armour: %s"));
         textArmor.setTranslateY(65 + 35);
 
         getChildren().addAll(bar, bg, textWeapon, textArmor);
-
-
-
     }
 }
