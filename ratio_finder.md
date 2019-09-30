@@ -14,6 +14,8 @@ You are given the following conversion rates:
 
 ### Tasks
 
+---
+
 #### Task 1
 
 Write a program that can convert between types above entered by the user. For example, the communication between the user and the program might look like this:
@@ -23,8 +25,7 @@ Write a program that can convert between types above entered by the user. For ex
 Kg
 > Please enter type 2:
 g
-> Result
-1 Kg is 1000 g
+> Result: 1 Kg is 1000 g
 ```
 
 Note: you are not allowed to hardcode the answer.
@@ -38,8 +39,7 @@ Enhance the program to compute a ratio between types are not immediately availab
 Kg
 > Please enter type 2:
 oz
-> Result
-1 Kg is 35.274 oz
+> Result: 1 Kg is 35.274 oz
 ```
 
 #### Task 3
@@ -51,15 +51,14 @@ Allow the program to handle cases where the ratio cannot be computed. For exampl
 Kg
 > Please enter type 2:
 m
-> Result
-Cannot be computed
+> Result: Cannot be computed
 ```
 
 #### Task 4
 
 Optimize the program to perform 2 conversions at most to get from any type to any other type. For example, to convert from `Kg` to `oz`, one can convert from `Kg` to `g`, to `mg` and finally to `oz`. That's 3 conversions.
 
-Hint: you might need to do some caching and pre-computations.
+Hint: you might need to do some caching and pre-computations during the program startup.
 
 #### Task 5 (Optional)
 
