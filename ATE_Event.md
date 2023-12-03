@@ -1,0 +1,95 @@
+## Event Evaluation Form
+
+Link: https://forms.office.com/e/unZBZ17wYp
+
+## Puzzle Sequence for Teams
+
+Team 1
+72645831
+
+Team 2
+54213876
+
+Team 3
+54872631
+
+Team 4
+12467358
+
+Team 5
+24817635
+
+Team 6
+47651283
+
+Team 7
+64231785
+
+Team 8
+16754283
+
+Team 9
+75214863
+
+Team 10
+14827365
+
+Team 11
+64587213
+
+Team 12
+71256348
+
+Team 13
+62374518
+
+Team 14
+42651738
+
+Team 15
+76234851
+
+Team 16
+62153748
+
+Team 17
+75164283
+
+Team 18
+45621387
+
+Team 19
+24165387
+
+Team 20
+54628317
+
+Team 21
+41625783
+
+Team 22
+17426538
+
+Team 23
+23715648
+
+Team 24
+52341687
+
+Team 25
+54286137
+
+Team 26
+74285631
+
+Team 27
+72543861
+
+Team 28
+64521738
+
+Team 29
+47652138
+
+Team 30
+54682173
